@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset='utf-8'>
+    <title>Test 2</title>
+    
+    <style>
+        #none, #bass, #snare, #highhat, #clave{
+            background-color: aquamarine;
+            font-size: 15pt;
+        }
+        
+        #reset, #ready{
+            background-color: bisque;
+            font-size: 12pt;
+        }
+        
+        #back, #prev, #next, #play{
+            background-color: cadetblue;
+            font-size: 15pt;
+            display: none;
+        }
+    
+    
+    </style>
+</head>
+ 
+<body>
+    
+<audio id="player"></audio>
+    
+<button id="none">None</button>
+<button id="bass">Bass</button>
+<button id="snare">Snare</button>
+<button id="highhat">High Hat</button>
+<button id="clave">Clave</button>
+
+<button id="reset">Reset</button> 
+<button id="ready">Ready</button>
+<hr>
+<div id="selection"></div>
+<hr>
+<button id="back">Back</button>
+<button id="prev">Previous</button>
+<button id="next">Next</button>
+<button id="play">Play</button>
+  
+</body>
+
+<script>
+    
+var aud_arr = [
+    
+    "Bass.mp3",
+    "Clave.mp3",
+    "HighHat.mp3",
+    "Snare.mp3"
+    
+]
+    
+
+var aud_arr = [];
+
+var num = 0;
+var none = document.getElementById("none");
+var bass = document.getElementById("bass");   
+var snare = document.getElementById("snare");
+var highhat = document.getElementById("highhat");   
+var clave = document.getElementById("clave");   
+var ready = document.getElementById("ready");   
+var reset = document.getElementById("reset");   
+var back = document.getElementById("back");   
+var prev = document.getElementById("prev");   
+var next = document.getElementById("next");
+var play = document.getElementById("play");
+var player = document.getElementById("player");
+var selection = document.getElementById("selection");
+    
+    
+    player.src = "Bass.mp3";
+    player.play();
+    
+     none.onclick = function (){
+          player.src=aud_arr[4];
+          player.play();
+          var span = document.createElement("span");
+          span.innerHTML="None";   
+          span.style.backgroundColor = "antiquewhite";
+          span.style.fontSize = "15pt";
+          span.style.fontFamily = "monospace";
+          span.style.margin = "5pt";
+          selection.appendChild(span);
+      }
+     
+        bass.onclick = function(){
+          aud_arr.push("Bass.mp3");
+           player.src=aud_arr[0];
+          player.play();
+          console.log(aud_arr);
+          var span = document.createElement("span");
+          span.innerHTML="Bass";
+          span.style.backgroundColor = "beige";
+          span.style.fontSize = "15pt";
+          span.style.fontFamily = "monospace";
+          span.style.margin = "5pt";
+          selection.appendChild(span);
+      }
+        
+     snare.onclick = function()
+     {
+         aud_arr.push("Snare.mp3");
+           player.src=aud_arr[1];
+          player.play();
+         console.log(aud_arr);
+         var span = document.createElement("span");
+         span.innerHTML="Snare";
+          span.style.backgroundColor = "blanchedalmond";
+          span.style.fontSize = "15pt";
+          span.style.fontFamily = "monospace";
+          span.style.margin = "5pt";
+         selection.appendChild(span);
+     }
+     
+     highhat.onclick = function(){
+          aud_arr.push("HighHat.mp3");
+            player.src=aud_arr[2];
+           player.play();
+          console.log(aud_arr);
+          var span = document.createElement("span");
+          span.innerHTML="HighHat";
+          span.style.backgroundColor = "burlywood";
+          span.style.fontSize = "15pt";
+          span.style.fontFamily = "monospace";
+          span.style.margin = "5pt";
+          selection.appendChild(span);
+         
+     }
+     
+     clave.onclick = function()
+     {
+          aud_arr.push("Clave.mp3");
+           player.src=aud_arr[3];
+           player.play();
+          console.log(aud_arr);
+          var span = document.createElement("span");
+          span.innerHTML="Clave";
+          span.style.backgroundColor = "cadetblue";
+          span.style.fontSize = "15pt";
+          span.style.fontFamily = "monospace";
+          span.style.margin = "5pt";
+          selection.appendChild(span);
+     }
+    
+      reset.onclick = function(){
+          
+          console.log ("clicked");
+          aud_arr = [];
+          selection.innerHTML="";
+    }
+    
+ 
+    
+ready.onclick = function(){
+    
+    console.log ("clicked");
+    none.style.display = "none";
+    bass.style.display = "none";
+    snare.style.display = "none";
+    highhat.style.display = "none";
+    clave.style.display = "none";
+    reset.style.display = "none";
+    ready.style.display = "none";
+    back.style.display = "inline";
+    prev.style.display = "inline";
+    next.style.display = "inline";
+    play.style.display = "inline";
+    
+}
+
+back.onclick = function(){
+    
+    console.log ("clicked");
+    none.style.display = "inline";
+    bass.style.display = "inline";
+    snare.style.display = "inline";
+    highhat.style.display = "inline";
+    clave.style.display = "inline";
+    reset.style.display = "inline";
+    ready.style.display = "inline";
+    back.style.display = "none";
+    prev.style.display = "none";
+    next.style.display = "none";
+    play.style.display = "none";
+    
+}
+
+next.onclick = function(){
+    
+     num++;
+     if (num > aud_arr.length-1 ){
+         num = aud_arr.length-1;
+     }
+    
+    player.src = aud_arr[num];
+    player.play();
+}
+
+prev.onclick = function(){
+    
+     num--;
+     if (num <= 0){
+         
+         num = 0;
+         
+     }
+    
+     player.src = aud_arr[num];
+     player.play();
+}
+
+ 
+          play.onclick = function(){
+         
+         
+          var repeatInt = setInterval(function(){
+                   console.log(aud_arr[num])
+                   if(aud_arr[num] == 0){
+                       aud.pause();
+                       console.log("it is paused")
+                   }
+                   else{
+                  player.src = aud_arr[num];
+                   player.play();
+                   }
+                   num++;
+                   
+                   if(num> aud_arr.length - 1){
+                       console.log("end of array");
+                       clearInterval(repeatInt);
+                   }
+          
+               },500, num=0);
+         
+     }
+    
+</script>  
+    
+</html>
